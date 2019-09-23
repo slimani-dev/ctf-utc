@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/challenges', "ChallengeController@index")->name('challenge');;
+Route::get('/challenges', "ChallengeController@index")->name('challenges');

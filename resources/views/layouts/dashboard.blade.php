@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>unapp Template</title>
+    <title>{{ config('app.name', 'CTF') }} | @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
@@ -56,7 +56,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <div id="colorlib-logo"><a href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a></div>
+                        <div id="colorlib-logo"><a href="{{ url('/') }}">{{ config('app.name', 'CTF') }}</a></div>
                     </div>
                     <div class="col-md-10 text-right menu-1">
                         <ul>
@@ -64,14 +64,15 @@
                             <li><a href="services.html">Services</a></li>
                             @guest
                                 <li>
-                                    <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
-                                @if (Route::has('register'))
+                            @if (Route::has('register'))
                                     <li>
-                                        <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a href="{{ route('register') }}">{{ __('Register') }}</a>
                                     </li>
                                 @endif
                             @else
+                                <li><a href="{{ route('challenges') }}">Challenges</a></li>
                                 <li class="has-dropdown">
                                     <a href="#" role="button">
                                         {{ Auth::user()->name }}

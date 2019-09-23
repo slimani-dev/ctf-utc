@@ -13,15 +13,16 @@ class ChallengeUser extends Migration
      */
     public function up()
     {
-        Schema::create('challenges', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('image')->nullable();
-            $table->string('image');
-            $table->string('name');
-            $table->string('flag');
-            $table->integer('points');
-            $table->text('description');
-            $table->timestamps();
+        Schema::create('challenge_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('challenge_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('challenge_id')->references('id')->on('challenges');
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('score')->after('email')->default(0);
         });
     }
 
@@ -32,6 +33,15 @@ class ChallengeUser extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('score');
+        });
+
+        Schema::table('challenge_user', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['challenge_id']);
+        });
+
+        Schema::dropIfExists('challenge_user');
     }
 }

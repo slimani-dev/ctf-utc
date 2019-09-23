@@ -1,7 +1,11 @@
 @extends('layouts.dashboard')
 
+@section('title', 'challenges')
+
 @section('content')
-    <section id="home" class="video-hero" style="height: 500px; background-image: url(images/cover_img_1.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+    <section id="home" class="video-hero"
+             style="height: 500px; background-image: url(images/cover_img_1.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;"
+             data-section="home">
         <div class="overlay"></div>
         <div class="display-t display-t2 text-center">
             <div class="display-tc display-tc2">
@@ -9,7 +13,8 @@
                     <div class="col-md-12 col-md-offset-0">
                         <div class="animate-box">
                             <h2>Portfolio grid w/o text</h2>
-                            <p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>Work  grid w/o text</span></p>
+                            <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
+                                <span>Work  grid w/o text</span></p>
                         </div>
                     </div>
                 </div>
@@ -20,69 +25,27 @@
     <div class="colorlib-work">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 animate-box">
-                    <div class="work-grid">
-                        <a href="#" class="work-img" style="background-image: url(images/work-1.jpg)">
-                            <span class="icon"><i class="icon-plus2"></i></span>
-                        </a>
+                @for($i = 0; $i< 20; $i++)
+                    <div class="col-md-4 col-sm-6 text-center animate-box">
+                        <div class="product-entry">
+                            <div class="product-img" style="background-image: url({{ asset('images/work-'.($i%9 +1).'.jpg') }});">
+                                <a href="#">
+                                    <p class="tag"><span class="sale">New</span></p>
+                                    <div class="title"><h2>Catch The Flag</h2></div>
+                                </a>
+                                <div class="cart">
+                                    <p>
+                                        <span><a href="#">start</a></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="desc">
+                                <h3><a href="product-detail.html">Floral Dress</a></h3>
+                                <p class="price"><span>$300.00</span></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 animate-box">
-                    <div class="work-grid">
-                        <a href="#" class="work-img" style="background-image: url(images/work-2.jpg)">
-                            <span class="icon"><i class="icon-plus2"></i></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-box">
-                    <div class="work-grid">
-                        <a href="#" class="work-img" style="background-image: url(images/work-3.jpg)">
-                            <span class="icon"><i class="icon-plus2"></i></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-box">
-                    <div class="work-grid">
-                        <a href="#" class="work-img" style="background-image: url(images/work-4.jpg)">
-                            <span class="icon"><i class="icon-plus2"></i></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-box">
-                    <div class="work-grid">
-                        <a href="#" class="work-img" style="background-image: url(images/work-5.jpg)">
-                            <span class="icon"><i class="icon-plus2"></i></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-box">
-                    <div class="work-grid">
-                        <a href="#" class="work-img" style="background-image: url(images/work-6.jpg)">
-                            <span class="icon"><i class="icon-plus2"></i></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-box">
-                    <div class="work-grid">
-                        <a href="#" class="work-img" style="background-image: url(images/work-7.jpg)">
-                            <span class="icon"><i class="icon-plus2"></i></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-box">
-                    <div class="work-grid">
-                        <a href="#" class="work-img" style="background-image: url(images/work-8.jpg)">
-                            <span class="icon"><i class="icon-plus2"></i></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 animate-box">
-                    <div class="work-grid">
-                        <a href="#" class="work-img" style="background-image: url(images/work-9.jpg)">
-                            <span class="icon"><i class="icon-plus2"></i></span>
-                        </a>
-                    </div>
-                </div>
+                @endfor
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">

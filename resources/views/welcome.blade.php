@@ -16,11 +16,10 @@
                             <p>with Unapp's high quality features</p>
                             @guest
                                 @if (Route::has('register'))
-                                    <p><a href="{{ route('register') }}" class="btn btn-primary btn-lg btn-custom">Start Now</a>
-                                    </p>
+                                    <p><a href="{{ route('register') }}" class="btn btn-primary btn-lg btn-custom">Start Now</a></p>
                                 @endif
                             @else
-                                <p><a href="{{ route('challenge') }}" class="btn btn-primary btn-lg btn-custom">Go to
+                                <p><a href="{{ route('challenges') }}" class="btn btn-primary btn-lg btn-custom">Go to
                                         challenges</a></p>
                             @endguest
                         </div>
