@@ -20,8 +20,8 @@
     <meta name="twitter:url" content=""/>
     <meta name="twitter:card" content=""/>
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400" rel="stylesheet">
+{{--    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400" rel="stylesheet">--}}
 
     <!-- Animate.css -->
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
@@ -72,7 +72,14 @@
                                     </li>
                                 @endif
                             @else
-                                <li><a href="{{ route('challenges') }}">Challenges</a></li>
+                                <li class="has-dropdown">
+                                    <a href="{{ route('challenges.index') }}">Challenges</a>
+                                    <ul class="dropdown">
+                                        <li>
+                                            <a href="{{ route('challenges.create') }}" >Add challenge</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="has-dropdown">
                                     <a href="#" role="button">
                                         {{ Auth::user()->name }}
@@ -105,13 +112,8 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <p>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                    All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a
-                        href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --><br>
-                    Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a>, <a
-                        href="http://pexels.com/" target="_blank">Pexels</a>
+                    <a href="https:/utc-dz.com" target="_blank">United Technologies Club</a>
                 </p>
             </div>
         </div>

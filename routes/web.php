@@ -18,5 +18,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/challenges', "ChallengeController@index")->name('challenges');
+Route::resource('challenges', 'ChallengeController');

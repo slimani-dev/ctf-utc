@@ -693,11 +693,14 @@ h1, h2, h3, h4, h5, h6, figure {
   margin-bottom: 40px;
 }
 .product-entry .product-img {
-  cursor: pointer;
   display: block;
   height: 270px;
   margin-bottom: 20px;
   position: relative;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  border-radius: 6px;
 }
 .product-entry .product-img .tag {
   position: absolute;
@@ -1306,7 +1309,7 @@ input[type=text] {
 #colorlib-footer {
   background: #303133;
   color: rgba(255, 255, 255, 0.6) !important;
-  padding-top: 6em;
+  padding-top: 2em;
 }
 #colorlib-footer .colorlib-widget p {
   font-size: 13px;

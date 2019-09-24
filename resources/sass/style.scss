@@ -765,11 +765,11 @@ h1, h2, h3, h4, h5, h6, figure {
 .product-entry{
 	margin-bottom: 40px;
 	.product-img{
-		cursor: pointer;
 		display: block;
 		height: 270px;
 		margin-bottom: 20px;
 		position: relative;
+		@include border-radius(6px);
 		.tag{
 			position: absolute;
 			top: 10px;
@@ -1338,7 +1338,7 @@ input[type="text"] {
 #colorlib-footer {
 	background: $brand-darker;
 	color: rgba($brand-white,.6)!important;
-	padding-top: 6em;
+	padding-top: 2em;
 
 	.colorlib-widget{
 		p{

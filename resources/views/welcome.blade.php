@@ -12,14 +12,14 @@
                 <div class="container">
                     <div class="col-md-12 col-md-offset-0">
                         <div class="animate-box">
-                            <h2>Take on your biggest projects and goals</h2>
-                            <p>with Unapp's high quality features</p>
+                            <h2 style="font-size: 6em">Game On!</h2>
+                            <p>solve the challenges and score the point <br> the winner takes it all</p>
                             @guest
                                 @if (Route::has('register'))
                                     <p><a href="{{ route('register') }}" class="btn btn-primary btn-lg btn-custom">Start Now</a></p>
                                 @endif
                             @else
-                                <p><a href="{{ route('challenges') }}" class="btn btn-primary btn-lg btn-custom">Go to
+                                <p><a href="{{ route('challenges.index') }}" class="btn btn-primary btn-lg btn-custom">Go to
                                         challenges</a></p>
                             @endguest
                         </div>
