@@ -1,64 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2c19f403-150f-457c-85a5-9d1acfd76a98" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ctf.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ctf.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Challenge.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Challenge.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ChallengeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ChallengeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_09_23_152504_create_challenges_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_09_23_152504_create_challenges_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/about.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/blog-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/cover_img_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/dashboard_full_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/dashboard_full_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/dashboard_full_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-12.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-13.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-14.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-15.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-16.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/item-9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/loader.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/loc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/mobile-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/mobile-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/person1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/person2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/person3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/person4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/work-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/work-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/work-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/work-4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/work-5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/work-6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/work-7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/work-8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/work-9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/challeges/index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="2c19f403-150f-457c-85a5-9d1acfd76a98" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +205,7 @@
       <option name="presentableId" value="Default" />
       <updated>1569251661437</updated>
       <workItem from="1569251663641" duration="22303000" />
-      <workItem from="1569315548809" duration="16888000" />
+      <workItem from="1569315548809" duration="17477000" />
     </task>
     <servers />
   </component>
