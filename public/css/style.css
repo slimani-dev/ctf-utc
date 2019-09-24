@@ -695,12 +695,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .product-entry .product-img {
   display: block;
   height: 270px;
-  margin-bottom: 20px;
   position: relative;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  border-radius: 6px;
 }
 .product-entry .product-img .tag {
   position: absolute;

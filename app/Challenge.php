@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
 class Challenge extends Model
 {
     protected $fillable = ['name','image','flag','points','category_id','description'];
+    protected $dates = ['created_at', 'updated_at'];
 
     public function category(){
         return $this->belongsTo(Category::class);

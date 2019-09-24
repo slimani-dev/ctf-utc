@@ -767,9 +767,7 @@ h1, h2, h3, h4, h5, h6, figure {
 	.product-img{
 		display: block;
 		height: 270px;
-		margin-bottom: 20px;
 		position: relative;
-		@include border-radius(6px);
 		.tag{
 			position: absolute;
 			top: 10px;

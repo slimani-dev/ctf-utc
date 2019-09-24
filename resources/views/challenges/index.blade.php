@@ -26,18 +26,63 @@
         <div class="container">
             <div class="row">
                 @foreach($challenges as $challenge)
-                    <div class="col-md-4 col-sm-6 text-center animate-box">
+                    <div class="col-md-4 col-sm-6 animate-box">
                         <div class="product-entry">
-                            <div class="product-img" style="background-image: url({{ asset($challenge->image) }});">
+                            <div class="product-img" data-toggle="modal"
+                                 data-target="#challengeModal{{ $challenge->id }}"
+                                 style="background-image: url({{ asset($challenge->image) }}); cursor: pointer">
                                 <p class="tag"><span class="sale">{{ $challenge->category->name }}</span></p>
                                 <a href="#">
-                                    <div class="title"><h2 class="price"><span>{{ $challenge->points }}</span> points</h2></div>
+                                    <div class="title">
+                                        <h2 class="price"><span>{{ $challenge->points }}</span>
+                                            points
+                                        </h2>
+                                    </div>
                                 </a>
                             </div>
-                            <div class="desc">
-                                <h3><a href="product-detail.html">{{ $challenge->name }}</a></h3>
-                                <p><span>@</span> {{ $challenge->user->name }}</p>
-                            </div>
+                            <article class="desc">
+                                <h2>
+                                    <a href="{{ $challenge->name }}" data-toggle="modal"
+                                       data-target="#challengeModal{{ $challenge->id }}">
+                                        {{ $challenge->name }}
+                                    </a>
+                                </h2>
+                                <strong>Solved by : </strong>{{ count($challenge->users) }} users<br>
+                                <p class="admin"><span>{{ $challenge->created_at->format('d-m-Y') }}</span> <a href="#"
+                                                                                                               class="admin"><span> by {{ $challenge->user->name }}</span></a>
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div id="challengeModal{{ $challenge->id }}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <article>
+                                <h2 class="text-uppercase">{{ $challenge->name }}</h2>
+                                <p class="admin">
+                                    <span>{{ $challenge->created_at->format('d-m-Y') }}</span>
+                                    <a href="#"
+                                       class="admin"><span> by {{ $challenge->user->name }}</span></a>
+                                </p>
+                                <strong>Points : </strong>{{ $challenge->points }}<br>
+                                <strong>Solved by : </strong>{{ count($challenge->users) }} users<br>
+                                <strong>Category: </strong>{{ $challenge->category->name }}<br>
+                                <pre style="display: inline-block;width: 100%;margin:10px 0 10px 0">{{ $challenge->description }}</pre>
+                                {{ Form::model(null, ['route' => 'challenges.store','class' => 'form-horizontal','files' => true])}}
+                                {{ Form::token() }}
+                                <div class="form-group">
+                                    <div class="col-xs-12 ">
+                                        {{ Form::text('name',null,['class' => 'form-control form-control-lg border-dark']) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                                {{ Form::close() }}
+                            </article>
                         </div>
                     </div>
                 @endforeach
@@ -57,88 +102,26 @@
         </div>
     </div>
 
-    <div id="colorlib-subscribe" class="colorlib-subscribe" style="background-image: url({{ asset('images/cover_img_1.jpg') }});" data-stellar-background-ratio="0.5">
+    <div id="colorlib-subscribe" class="colorlib-subscribe"
+         style="background-image: url({{ asset('images/cover_img_1.jpg') }});" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 text-center colorlib-heading animate-box">
                     <h2>You want to add something</h2>
-                    <p>If you have a challenge and you want to add it it's simple just add it here and once approved everyone will see it</p>
+                    <p>If you have a challenge and you want to add it it's simple just add it here and once approved
+                        everyone will see it</p>
                 </div>
             </div>
             <div class="row animate-box">
                 <div class="col-md-6 col-md-offset-3">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Challenge</button>
+                            <a href="{{ route('challenges.create') }}" class="btn btn-primary">Add Challenge</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">New Challenge</h4>
-                </div>
-                <div class="modal-body">
-
-                    <form class="form-horizontal" action="">
-                        @csrf
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="email">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Password:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="flag" name="flag" placeholder="Enter password">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Password:</label>
-                            <div class="col-sm-10">
-                                <input type="number" step="1" min="0" max="200" class="form-control" id="points" name="points" placeholder="Enter password">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                       aria-describedby="inputGroupFileAddon01">
-                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="comment">Description:</label>
-                            <textarea class="form-control" name="description" rows="5" id="comment"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
         </div>
     </div>
 @endsection
