@@ -29,8 +29,12 @@
                     <div class="col-md-4 col-sm-6 animate-box">
                         <div class="product-entry">
                             <div class="product-img" data-toggle="modal"
+                                 id="challengeImage{{ $challenge->id }}"
                                  data-target="#challengeModal{{ $challenge->id }}"
                                  style="background-image: url({{ asset($challenge->image) }}); cursor: pointer">
+                                @if($challenge->users()->find(auth()->id()))
+                                    <p class="solved"><span class="new">Solved</span></p>
+                                @endif
                                 <p class="tag"><span class="sale">{{ $challenge->category->name }}</span></p>
                                 <a href="#">
                                     <div class="title">
@@ -47,7 +51,9 @@
                                         {{ $challenge->name }}
                                     </a>
                                 </h2>
-                                <strong>Solved by : </strong>{{ count($challenge->users) }} users<br>
+                                <strong>Solved by : </strong><span
+                                        id="challengeCounter{{ $challenge->id }}">{{ count($challenge->users) }}</span>
+                                users<br>
                                 <p class="admin"><span>{{ $challenge->created_at->format('d-m-Y') }}</span> <a href="#"
                                                                                                                class="admin"><span> by {{ $challenge->user->name }}</span></a>
                                 </p>
@@ -65,7 +71,9 @@
                                        class="admin"><span> by {{ $challenge->user->name }}</span></a>
                                 </p>
                                 <strong>Points : </strong>{{ $challenge->points }}<br>
-                                <strong>Solved by : </strong>{{ count($challenge->users) }} users<br>
+                                <strong>Solved by : </strong><span
+                                        id="ModelchallengeCounter{{ $challenge->id }}">{{ count($challenge->users) }}</span>
+                                users<br>
                                 <strong>Category: </strong>{{ $challenge->category->name }}<br>
                                 <strong>Description: </strong><br>
                                 <div id="description{{ $challenge->id }}" style="padding-top: 10px"></div>
@@ -83,7 +91,9 @@
                                     <div class="col-sm-10">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close
                                         </button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button id="submit{{ $challenge->id }}" type="submit" class="btn btn-success">
+                                            Submit
+                                        </button>
                                     </div>
                                 </div>
                                 {{ Form::close() }}
@@ -137,16 +147,12 @@
         function showContent(id, delta) {
             const converter = new QuillDeltaToHtmlConverter(delta, {});
             const html = converter.convert();
-            console.log(html);
             $(id).html(html);
         }
 
-        @foreach($challenges as $challenge)
-        showContent('#description{{ $challenge->id }}', {!! $challenge->description !!});
-        $('#flag{{ $challenge->id }}').submit(function (event) {
+        function submit(event, id) {
             event.preventDefault();
-            console.log(event.target);
-            var form = $(this);
+            var form = $(event.target);
             var url = form.attr('action');
 
             $.ajax({
@@ -154,18 +160,34 @@
                 url: url,
                 data: form.serialize(),
                 success: function (data) {
-                    console.log(data);
-                    if(data.error){
-                        $('#notification{{ $challenge->id }}').html(
+                    if (data.error) {
+                        $('#notification' + id).html(
                             `<div class="alert alert-danger alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         ${data.error}.
                                     </div>`
                         )
+                    } else {
+                        $('#notification' + id).html(
+                            `<div class="alert alert-success alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        Nice jobe.
+                                    </div>`
+                        );
+                        $('#challengeImage' + id).prepend(`<p class="solved"><span class="new">Solved</span></p>`);
+                        $('#challengeCounter' + id).text(parseInt($('#challengeCounter' + id).text()) + 1);
+                        $('#ModelchallengeCounter' + id).text(parseInt($('#ModelchallengeCounter' + id).text()) + 1);
+                        $('#submit' + id).attr('disabled', 'disabled')
                     }
-                    else  location.reload();
                 }
             });
+        }
+
+        @foreach($challenges as $challenge)
+        showContent('#description{{ $challenge->id }}', {!! $challenge->description !!});
+
+        $('#flag{{ $challenge->id }}').submit(function (event) {
+            submit(event,{{ $challenge->id }});
         });
         @endforeach
     </script>
