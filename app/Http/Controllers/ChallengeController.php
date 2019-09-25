@@ -88,9 +88,8 @@ class ChallengeController extends Controller
 
         if (!$challengeSolvedAlready) {
             if ($validatedData['flag'] == $challenge->flag) {
-                $challenge->users()->attach($authUser->id);
-                $authUser->score += $challenge->points;
-                $authUser->save();
+
+                $authUser->solve($challenge);
 
                 $response = [
                     'flag' => 'correct'
@@ -107,6 +106,7 @@ class ChallengeController extends Controller
         }
 
         $response['score'] = $authUser->score;
+        $response['rank'] = $authUser->rank();
 
         return response()->json($response);
     }

@@ -72,4 +72,23 @@ class User extends Authenticatable
     public function challenges(){
         return $this->hasMany(Challenge::class);
     }
+
+    public function solve(Challenge $challenge){
+        $this->solvedChallenges()->attach($challenge);
+        $this->score += $challenge->points;
+        $this->save();
+    }
+
+    public function scoreBoard(){
+        return User::orderBy('score','desc')->get();
+    }
+
+    public function rank(){
+        $i = 1;
+        foreach ($this->scoreBoard() as $user){
+            if($this->score < $user->score) $i++;
+            else break;
+        }
+        return $i;
+    }
 }

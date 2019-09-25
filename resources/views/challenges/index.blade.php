@@ -12,9 +12,8 @@
                 <div class="container">
                     <div class="col-md-12 col-md-offset-0">
                         <div class="animate-box">
-                            <h2>Your Score is : <span id="userScore">{{ auth()->user()->score }}</span></h2>
-                            <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                                <span>Work  grid w/o text</span></p>
+                            <h2>Score : <span id="userScore">{{ auth()->user()->score }}</span></h2>
+                            <h2>Rank : <span id="userRank">{{ auth()->user()->rank() }}</span></h2>
                         </div>
                     </div>
                 </div>
@@ -79,7 +78,7 @@
                                 <div id="description{{ $challenge->id }}" style="padding-top: 10px"></div>
 
                                 <div id="notification{{ $challenge->id }}"></div>
-                                {{ Form::open(['route' => 'challenges.solve','class' => 'form-horizontal','files' => true, 'id'=>"flag".$challenge->id])}}
+                                {{ Form::open(['route' => 'challenges.solve','class' => 'form-horizontal','files' => true, 'id'=> 'flag'.$challenge->id])}}
                                 {{ Form::token() }}
                                 <div class="form-group">
                                     <div class="col-xs-12 ">
@@ -143,9 +142,7 @@
             $(id).html(html);
         }
 
-        function submit(event, id) {
-            event.preventDefault();
-            var form = $(event.target);
+        function ajaxSubmitForm(form, id) {
             var url = form.attr('action');
 
             $.ajax({
@@ -164,14 +161,15 @@
                         $('#notification' + id).html(
                             `<div class="alert alert-success alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        Nice jobe.
+                                        Nice jobe. your scoer now is ${data.score}, your number ${data.rank} in the scoreboard
                                     </div>`
                         );
                         $('#challengeImage' + id).prepend(`<p class="solved"><span class="new">Solved</span></p>`);
                         $('#challengeCounter' + id).text(parseInt($('#challengeCounter' + id).text()) + 1);
                         $('#ModelchallengeCounter' + id).text(parseInt($('#ModelchallengeCounter' + id).text()) + 1);
-                        $('#submit' + id).attr('disabled', 'disabled')
-                        $('#userScore').text(data.score)
+                        $('#submit' + id).attr('disabled', 'disabled');
+                        $('#userScore').text(data.score);
+                        $('#userRank').text(data.rank);
                     }
                 }
             });
@@ -181,7 +179,8 @@
         showContent('#description{{ $challenge->id }}', {!! $challenge->description !!});
 
         $('#flag{{ $challenge->id }}').submit(function (event) {
-            submit(event,{{ $challenge->id }});
+            event.preventDefault();
+            ajaxSubmitForm($(this),{{ $challenge->id }});
         });
         @endforeach
     </script>
