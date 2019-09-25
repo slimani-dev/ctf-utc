@@ -56,7 +56,7 @@
                     </div>
                     <!-- Modal -->
                     <div id="challengeModal{{ $challenge->id }}" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-lg">
                             <article>
                                 <h2 class="text-uppercase">{{ $challenge->name }}</h2>
                                 <p class="admin">
@@ -69,16 +69,20 @@
                                 <strong>Category: </strong>{{ $challenge->category->name }}<br>
                                 <strong>Description: </strong><br>
                                 <div id="description{{ $challenge->id }}" style="padding-top: 10px"></div>
-                                {{ Form::model(null, ['route' => 'challenges.store','class' => 'form-horizontal','files' => true])}}
+
+                                <div id="notification{{ $challenge->id }}"></div>
+                                {{ Form::open(['route' => 'challenges.solve','class' => 'form-horizontal','files' => true, 'id'=>"flag".$challenge->id])}}
                                 {{ Form::token() }}
                                 <div class="form-group">
                                     <div class="col-xs-12 ">
-                                        {{ Form::text('name',null,['class' => 'form-control form-control-lg border-dark']) }}
+                                        {{ Form::hidden('challenge_id',$challenge->id) }}
+                                        {{ Form::text('flag',null,['class' => 'form-control form-control-lg border-dark']) }}
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-10">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>
@@ -128,16 +132,41 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('js/QuillDeltaToHtmlConverter.bundle.js') }}"></script>
-<script>
-    function showContent(id,delta) {
-        const converter = new QuillDeltaToHtmlConverter(delta, {});
-        const html  = converter.convert();
-        console.log(html);
-        $(id).html(html);
-    }
-    @foreach($challenges as $challenge)
-        showContent( '#description{{ $challenge->id }}', {!! $challenge->description !!});
-    @endforeach
-</script>
+    <script src="{{ asset('js/QuillDeltaToHtmlConverter.bundle.js') }}"></script>
+    <script>
+        function showContent(id, delta) {
+            const converter = new QuillDeltaToHtmlConverter(delta, {});
+            const html = converter.convert();
+            console.log(html);
+            $(id).html(html);
+        }
+
+        @foreach($challenges as $challenge)
+        showContent('#description{{ $challenge->id }}', {!! $challenge->description !!});
+        $('#flag{{ $challenge->id }}').submit(function (event) {
+            event.preventDefault();
+            console.log(event.target);
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function (data) {
+                    console.log(data);
+                    if(data.error){
+                        $('#notification{{ $challenge->id }}').html(
+                            `<div class="alert alert-danger alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        ${data.error}.
+                                    </div>`
+                        )
+                    }
+                    else  location.reload();
+                }
+            });
+        });
+        @endforeach
+    </script>
 @endsection

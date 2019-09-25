@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Challenge;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,7 +18,7 @@ class ChallengeController extends Controller
     public function index()
     {
         $challenges = Challenge::all();
-        return view('challenges.index',compact('challenges'));
+        return view('challenges.index', compact('challenges'));
     }
 
     /**
@@ -27,7 +28,7 @@ class ChallengeController extends Controller
      */
     public function create()
     {
-        $categories = Category::all()->pluck('name','id');
+        $categories = Category::all()->pluck('name', 'id');
         return view('challenges.create', compact('categories'));
     }
 
@@ -61,10 +62,51 @@ class ChallengeController extends Controller
 
     }
 
+    public function solve(Request $request)
+    {
+        $validatedData = $request->validate([
+            'challenge_id' => 'required',
+            'flag' => 'required',
+        ]);
+
+        $challenge = Challenge::find($validatedData['challenge_id']);
+
+        $challengeSolvedAlready = false;
+        $authUser = User::find(auth()->id());
+        foreach ($challenge->users as $user) {
+            if ($user->id == $authUser->id) {
+                $challengeSolvedAlready = true;
+                break;
+            }
+        }
+
+        if (!$challengeSolvedAlready) {
+            if ($validatedData['flag'] == $challenge->flag) {
+                $challenge->users()->attach($authUser->id);
+                $authUser->score += $challenge->points;
+                $authUser->save();
+
+                $response = [
+                    'flag' => 'correct'
+                ];
+            } else {
+                $response = [
+                    'error' => 'flag incorrect'
+                ];
+            }
+        } else {
+            $response = [
+                'error' => "challenge solved already",
+            ];
+        }
+
+        return response()->json($response);
+    }
+
     /**
      * Display the specified resource.
      *
-     * @param  \App\Challenge  $challenge
+     * @param \App\Challenge $challenge
      * @return Response
      */
     public function show(Challenge $challenge)
@@ -75,7 +117,7 @@ class ChallengeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Challenge  $challenge
+     * @param \App\Challenge $challenge
      * @return Response
      */
     public function edit(Challenge $challenge)
@@ -87,7 +129,7 @@ class ChallengeController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  \App\Challenge  $challenge
+     * @param \App\Challenge $challenge
      * @return Response
      */
     public function update(Request $request, Challenge $challenge)
@@ -98,7 +140,7 @@ class ChallengeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Challenge  $challenge
+     * @param \App\Challenge $challenge
      * @return Response
      */
     public function destroy(Challenge $challenge)
