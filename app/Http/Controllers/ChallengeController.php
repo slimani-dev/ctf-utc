@@ -23,7 +23,7 @@ class ChallengeController extends Controller
      */
     public function index()
     {
-        $challenges = Challenge::all();
+        $challenges = Challenge::paginate(9);
         return view('challenges.index', compact('challenges'));
     }
 
