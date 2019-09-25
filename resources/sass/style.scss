@@ -998,6 +998,10 @@ article{
 		margin-bottom: 15px;
 		a{
 			color: $brand-darker;
+			white-space: nowrap;
+			overflow: hidden;
+			display: block;
+			text-overflow: ellipsis;
 		}
 	}
 	.admin{
