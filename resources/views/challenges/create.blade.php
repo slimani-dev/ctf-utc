@@ -23,7 +23,7 @@
                 @endif
                 <div class="col-xs-10 col-xs-offset-1 text-center p-5 m-5">
                     <div>
-                        {{ Form::model(null, ['route' => 'challenges.store','class' => 'form-horizontal','files' => true])}}
+                        {{ Form::model(null, ['route' => 'challenges.store','class' => 'form-horizontal','files' => true , 'id' => 'challengeForm'])}}
                         {{ Form::token() }}
                         <div class="form-group">
                             {{ Form::label('name', 'Name:',['class' => 'control-label col-sm-2']) }}
@@ -61,7 +61,7 @@
                         <div class="form-group">
                             {{ Form::label('description', 'Description:',['class' => 'control-label col-sm-2']) }}
                             <div class="col-sm-10">
-                                {{ Form::textarea('description',null,['class'=>"form-control"]) }}
+                                <div class="form-control" id="editor"></div>
                             </div>
                         </div>
 

@@ -67,7 +67,8 @@
                                 <strong>Points : </strong>{{ $challenge->points }}<br>
                                 <strong>Solved by : </strong>{{ count($challenge->users) }} users<br>
                                 <strong>Category: </strong>{{ $challenge->category->name }}<br>
-                                <pre style="display: inline-block;width: 100%;margin:10px 0 10px 0">{{ $challenge->description }}</pre>
+                                <strong>Description: </strong><br>
+                                <div id="description{{ $challenge->id }}" style="padding-top: 10px"></div>
                                 {{ Form::model(null, ['route' => 'challenges.store','class' => 'form-horizontal','files' => true])}}
                                 {{ Form::token() }}
                                 <div class="form-group">
@@ -124,4 +125,19 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('js/QuillDeltaToHtmlConverter.bundle.js') }}"></script>
+<script>
+    function showContent(id,delta) {
+        const converter = new QuillDeltaToHtmlConverter(delta, {});
+        const html  = converter.convert();
+        console.log(html);
+        $(id).html(html);
+    }
+    @foreach($challenges as $challenge)
+        showContent( '#description{{ $challenge->id }}', {!! $challenge->description !!});
+    @endforeach
+</script>
 @endsection
