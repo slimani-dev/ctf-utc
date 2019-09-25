@@ -12,7 +12,7 @@
                 <div class="container">
                     <div class="col-md-12 col-md-offset-0">
                         <div class="animate-box">
-                            <h2>Portfolio grid w/o text</h2>
+                            <h2>Your Score is : <span id="userScore">{{ auth()->user()->score }}</span></h2>
                             <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
                                 <span>Work  grid w/o text</span></p>
                         </div>
@@ -178,6 +178,7 @@
                         $('#challengeCounter' + id).text(parseInt($('#challengeCounter' + id).text()) + 1);
                         $('#ModelchallengeCounter' + id).text(parseInt($('#ModelchallengeCounter' + id).text()) + 1);
                         $('#submit' + id).attr('disabled', 'disabled')
+                        $('#userScore').text(data.score)
                     }
                 }
             });

@@ -106,6 +106,8 @@ class ChallengeController extends Controller
             ];
         }
 
+        $response['score'] = $authUser->score;
+
         return response()->json($response);
     }
 
